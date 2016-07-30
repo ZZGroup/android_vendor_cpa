@@ -13,17 +13,27 @@
 # limitations under the License.
 
 export VENDOR := cpa
+
+# CrystalPA
 ROM_VERSION_MAJOR := 1
 ROM_VERSION_MINOR := 0
 ROM_VERSION_MAINTENANCE := 0
 ROM_VERSION_TAG := CrystalPA_Alpha
 
+# AOSPA
+PA_VERSION_MAJOR := 6
+PA_VERSION_MINOR := 0
+PA_VERSION_MAINTENANCE := 1
+PA_VERSION_TAG := AOSPA
+
 # Include versioning information
 VERSION := $(ROM_VERSION_TAG).$(ROM_VERSION_MAJOR).$(ROM_VERSION_MINOR).$(ROM_VERSION_MAINTENANCE)
+PA_VERSION := $(PA_VERSION_TAG).$(PA_VERSION_MAJOR).$(PA_VERSION_MINOR).$(PA_VERSION_MAINTENANCE)
 export ROM_VERSION := $(VERSION)-$(shell date -u +%Y%m%d)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(ROM_VERSION) \
-    ro.cpa.version=$(VERSION)
+    ro.cpa.version=$(VERSION) \
+    ro.pa.version=$(PA_VERSION)
 
 # Override undesired Google defaults
 PRODUCT_PROPERTY_OVERRIDES += \
