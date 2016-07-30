@@ -77,10 +77,10 @@ EXTRAS="$2"
 if [ $ARCH = "64" ]; then
 
 # Get build version
-MAJOR=$(cat $TOP/vendor/cpa/vendor.mk | grep 'CPA_VERSION_MAJOR := *' | sed  's/CPA_VERSION_MAJOR := //g')
-MINOR=$(cat $TOP/vendor/cpa/vendor.mk | grep 'CPA_VERSION_MINOR := *' | sed  's/CPA_VERSION_MINOR := //g')
-MAINTENANCE=$(cat $TOP/vendor/cpa/vendor.mk | grep 'CPA_VERSION_MAINTENANCE := *' | sed  's/CPA_VERSION_MAINTENANCE := //g')
-CPA=$(cat $TOP/vendor/cpa/vendor.mk | grep 'CPA_VERSION_TAG := *' | sed  's/CPA_VERSION_TAG := //g')
+MAJOR=$(cat $TOP/vendor/cpa/main.mk | grep 'ROM_VERSION_MAJOR := *' | sed  's/ROM_VERSION_MAJOR := //g')
+MINOR=$(cat $TOP/vendor/cpa/main.mk | grep 'ROM_VERSION_MINOR := *' | sed  's/ROM_VERSION_MINOR := //g')
+MAINTENANCE=$(cat $TOP/vendor/cpa/vendor.mk | grep 'ROM_VERSION_MAINTENANCE := *' | sed  's/CPA_VERSION_MAINTENANCE := //g')
+CPA=$(cat $TOP/vendor/cpa/main.mk | grep 'ROM_VERSION_TAG := *' | sed  's/ROM_VERSION_TAG := //g')
 
 if [ -n "$TAG" ]; then
         VERSION=$MAJOR.$MINOR$MAINTENANCE
@@ -121,7 +121,7 @@ echo -e ""
 
 export DEVICE=$DEVICE
 
-CHROMIUM=$(cat $TOP/vendor/cpa/products/cpa_$DEVICE.mk | grep 'PREBUILD_CHROMIUM := *' | sed  's/PREBUILD_CHROMIUM := //g')
+CHROMIUM=$(cat $TOP/vendor/cpa/products/$DEVICE/cpa_$DEVICE.mk | grep 'PREBUILD_CHROMIUM := *' | sed  's/PREBUILD_CHROMIUM := //g')
 	if [ "$CHROMIUM" == "false" ]; then
         	export USE_PREBUILT_CHROMIUM=0
         	echo -e "In your $DEVICE tree CHROMIUM PREBUILT IS DISABLED!"
@@ -130,7 +130,7 @@ CHROMIUM=$(cat $TOP/vendor/cpa/products/cpa_$DEVICE.mk | grep 'PREBUILD_CHROMIUM
 	fi
 
 #Generate Changelog
-ZMIANY=$(cat $TOP/vendor/cpa/products/cpa_$DEVICE.mk | grep 'CHCE_CHANGELOG := *' | sed  's/CHCE_CHANGELOG := //g')
+ZMIANY=$(cat $TOP/vendor/cpa/products/$DEVICE/cpa_$DEVICE.mk | grep 'CHCE_CHANGELOG := *' | sed  's/CHCE_CHANGELOG := //g')
 	if [ "$ZMIANY" == "true" ]; then
         	export CHANGELOG=true
         	echo -e "Changelog for $DEVICE is enabled!"
